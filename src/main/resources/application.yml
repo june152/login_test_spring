@@ -1,0 +1,36 @@
+# 서버설정
+server:
+  address: 0.0.0.0
+  servlet:
+    context-path: / # 컨텍스트 패스 지정
+    session:
+      tracking-modes: cookie # 세션아이디를 쿠키에 저장함
+      cookie:
+        path: /
+  port: 8888 # 서비스 포트 지정
+  error: # 에러처리 옵션
+    include-exception: TRUE # 익셉션 포함
+    include-stacktrace: ALWAYS # 트레이스는 언제나 표시
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ssafyweb?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: socialstd
+    hikari:
+      auto-commit: false
+      connection-test-query: SELECT 1
+      minimum-idle: 10
+      maximum-pool-size: 50
+      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
+      pool-name: HikariCP
+      validation-timeout: 3000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      read-only: false
+
+# mybatis Setting
+mybatis:
+  type-aliases-package: com.hjp.testproject.vo # 이 패키지에 속한 VO는 alias 없이 클래스명 사용
+  mapper-locations: mybatis/**/*.xml #    mybatis mapper 파일 위치  resources 기준

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjp.testproject.mapper.table.DataTestMapper">
+
+    <insert id="insert" parameterType="MemberTestDataVO">
+		INSERT INTO ssafyweb.ssafy_member (
+			userId, nickName, userPwd, joinDate, profileImg, refreshtoken, socialType
+		)
+		VALUES (
+			#{userId}, #{nickName}, IF(#{userPwd} IS NULL, NULL, #{userPwd}), NOW(), #{profileImg}, #{refreshToken}, IF(#{socialType} IS NULL, NULL, #{socialType})
+		)
+    </insert>
+
+    <update id="update" parameterType="MemberTestDataVO">
+
+    </update>
+
+    <update id="delete" parameterType="MemberTestDataVO">
+
+    </update>
+
+    <select id="getData" parameterType="MemberTestDataVO" resultType="MemberTestDataVO">
+        select *
+        from ssafyweb.ssafy_member
+		where userId = ${userId}
+    </select>
+
+    <select id="getList" parameterType="MemberTestDataVO" resultType="MemberTestDataVO">
+        select *
+        from ssafyweb.ssafy_member
+    </select>
+
+    <select id="login" parameterType="MemberTestDataVO" resultType="MemberTestDataVO">
+		select nickName, userid, email
+		from ssafy_member
+		where userId = #{userId} and userpwd = #{userPwd}
+	</select>
+
+    <select id="getRefreshToken" parameterType="String" resultType="String">
+		select refreshtoken
+		from ssafy_member
+		where userId = #{value}
+	</select>
+
+	<update id="saveRefreshToken" parameterType="Map">
+		update ssafy_member
+		    set refreshtoken = #{refreshToken}
+		    where userId = #{userId}
+	</update>
+
+	<update id="deleteRefreshToken" parameterType="Map">
+		update ssafy_member
+		    set refreshtoken = #{refreshToken, jdbcType=VARCHAR}
+		    where userId = #{userId}
+	</update>
+
+    <select id="idCheck" parameterType="MemberTestDataVO" resultType="int">
+		select count(userId)
+		from ssafy_member
+		where userId = #{userId} and socialType = #{socialType}
+	</select>
+
+</mapper>
