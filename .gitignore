@@ -38,3 +38,5 @@ out/
 
 ## yml ##
 !**/src/main/**/application.yml
+*.yml
+application.yml
