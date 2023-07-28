@@ -34,3 +34,8 @@ spring:
 mybatis:
   type-aliases-package: com.hjp.testproject.vo # 이 패키지에 속한 VO는 alias 없이 클래스명 사용
   mapper-locations: mybatis/**/*.xml #    mybatis mapper 파일 위치  resources 기준
+
+api:
+  kakao:
+    rest: c11b41a51e8b01d4961287d02726bf56
+    redirect: http://localhost:3000/redirect

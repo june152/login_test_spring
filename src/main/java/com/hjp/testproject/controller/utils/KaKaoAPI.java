@@ -1,5 +1,6 @@
 package com.hjp.testproject.controller.utils;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,8 +14,11 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class KaKaoAPI {
-    private final String KAKAO_REST_API_KEY = "c11b41a51e8b01d4961287d02726bf56";
-    private final String REDIRECT_URI = "http://localhost:3000/redirect";
+    @Value("${api.kakao.rest}")
+    private String KAKAO_REST_API_KEY;
+
+    @Value("${api.kakao.redirect}")
+    private String REDIRECT_URI = "http://localhost:3000/redirect";
 
     /**
      * code로 accessToken발급 후 유저정보 조회
