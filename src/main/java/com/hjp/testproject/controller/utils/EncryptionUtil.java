@@ -24,10 +24,10 @@ import java.util.Base64;
  * ------------------------ 
  * 개정이력
  * 2016. 8.  5. Raccoon : 최초작성
- * 2021. 6. 8. 김준곤 : Deprecated 된 클래스 변경
+ * 2021. 6. 8. Deprecated 된 클래스 변경
  * </pre>
  * 
- * @author 김준곤
+ * @author
  */
 public class EncryptionUtil {
 	private EncryptionUtil() {

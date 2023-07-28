@@ -152,6 +152,9 @@ public class MemberTestController {
                 cookie.setSecure(true);
                 cookie.setPath("/");
                 Cookie id = new Cookie("id", vo.getUserId());
+                id.setPath("/");
+                id.setHttpOnly(true);
+                id.setSecure(true);
                 response.addCookie(cookie);
                 response.addCookie(id);
                 resultMap.put("message", SUCCESS);
@@ -245,5 +248,30 @@ public class MemberTestController {
             return null;
         }
 
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<Map<String, Object>> logout(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+
+        try {
+            Cookie cookie = new Cookie("refresh_token", null);
+            Cookie idCookie = new Cookie("id", null);
+            cookie.setMaxAge(0);
+            idCookie.setMaxAge(0);
+            cookie.setPath("/");
+            idCookie.setPath("/");
+            response.addCookie(cookie);
+            response.addCookie(idCookie);
+            resultMap.put("message", SUCCESS);
+            status = HttpStatus.ACCEPTED;
+        } catch (Exception e) {
+            logger.error("로그아웃 실패 : {}", e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 }

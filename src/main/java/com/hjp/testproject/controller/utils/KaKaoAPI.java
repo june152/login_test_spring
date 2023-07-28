@@ -18,7 +18,7 @@ public class KaKaoAPI {
     private String KAKAO_REST_API_KEY;
 
     @Value("${api.kakao.redirect}")
-    private String REDIRECT_URI = "http://localhost:3000/redirect";
+    private String REDIRECT_URI;
 
     /**
      * code로 accessToken발급 후 유저정보 조회
